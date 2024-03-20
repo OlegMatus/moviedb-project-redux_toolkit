@@ -1,0 +1,11 @@
+.Main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.MoviesListContainer{
+    margin-top: 20px ;
+    width: 80%;
+    display: flex;
+    flex-flow: wrap;
+}
