@@ -1,0 +1,7 @@
+.GenreBox{
+    width: 12.5%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

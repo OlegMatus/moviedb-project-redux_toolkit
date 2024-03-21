@@ -1,0 +1,10 @@
+body{
+    background: url("https://cdn.dribbble.com/userupload/3149713/file/original-1446c447326bf4bc7733c2f029d97942.png?resize=1200x900&vertical=center") center/cover no-repeat fixed;
+}
+.GenresContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: wrap;
+}

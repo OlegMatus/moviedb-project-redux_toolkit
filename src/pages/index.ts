@@ -1,4 +1,3 @@
-export * from "./MoviesPage";
+export * from "./GenresPage";
 export * from "./MovieDetailsPage";
-export * from "./GenresPage"
-export * from "./"
+export * from "./MoviesPage"

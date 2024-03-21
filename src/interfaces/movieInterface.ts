@@ -1,5 +1,3 @@
-import {IGenre} from "./genreInterface";
-
 export interface IMovie {
     id: number,
     adult: boolean,
@@ -16,5 +14,8 @@ export interface IMovie {
     video: boolean,
     vote_average: number,
     vote_count: number,
-    genres: IGenre[];
+}
+
+export interface IMovies{
+    results: []
 }

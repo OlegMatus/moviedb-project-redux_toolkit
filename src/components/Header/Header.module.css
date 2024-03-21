@@ -27,3 +27,17 @@ body {
 .Header a[class='active'] {
     color: #eef521;
 }
+.Switch {
+    display: flex;
+    justify-content: end;
+    flex-direction: row-reverse;
+    align-items: center;
+    font-size: 15px;
+    color: goldenrod;
+}
+.DarkTheme{
+    background: url("https://cdn.dribbble.com/userupload/3149718/file/original-cfb73d80e2b1290438e3109991d4e05c.png?resize=1200x900&vertical=center");
+}
+.LightTheme{
+    background: url("");
+}
