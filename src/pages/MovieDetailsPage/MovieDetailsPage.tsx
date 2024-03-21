@@ -11,12 +11,12 @@ const MovieDetailsPage = () => {
     const dispatch = useAppDispatch();
 
     const {currentMovie} = useAppSelector(state => state.movies);
-    const {movieId} = useParams();
+    const {id} = useParams();
 
     useEffect(() => {
-        const movie = dispatch(movieAction.getById({movieId: Number(movieId)}));
+        const movie = dispatch(movieAction.getById({id: Number(id)}));
         console.log(movie);
-    }, [dispatch, movieId]);
+    }, [dispatch, id]);
 
     return (
         <div className={css.MovieDetailsBlock}>

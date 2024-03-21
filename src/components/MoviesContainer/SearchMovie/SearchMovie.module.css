@@ -1,0 +1,23 @@
+.SearchMovie {
+    margin-top: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+}
+
+.input_block {
+    width: 100%;
+    height: 25px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.movies_block {
+    margin-top: 100px;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+}
