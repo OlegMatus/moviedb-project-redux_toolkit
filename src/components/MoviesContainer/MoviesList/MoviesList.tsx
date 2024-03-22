@@ -5,6 +5,7 @@ import {useAppSelector} from "../../../hooks";
 import {MovieCard} from "../MovieCard";
 import {useAppDispatch} from "../../../hooks";
 import {movieAction} from "../../../store";
+
 import css from "./MovieList.module.css"
 
 interface IProps extends PropsWithChildren {
@@ -12,7 +13,7 @@ interface IProps extends PropsWithChildren {
 }
 
 const MoviesList: FC<IProps> = () => {
-    const {movies} = useAppSelector(state => state.movies);
+    const {movies, isLoading} = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
 
     const [query, _] = useSearchParams();
@@ -21,6 +22,10 @@ const MoviesList: FC<IProps> = () => {
     useEffect(() => {
         dispatch(movieAction.getAll({page}))
     }, []);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className={css.Main}>

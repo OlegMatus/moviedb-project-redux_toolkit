@@ -1,14 +1,19 @@
+.Main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .SearchMovie {
     margin-top: 20px;
-    width: 100%;
+    width: 80%;
     height: 100%;
     display: flex;
     flex-flow: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .input_block {
-    width: 100%;
+    width: 25%;
     height: 25px;
     font-size: 25px;
     display: flex;
@@ -16,7 +21,7 @@
 }
 
 .movies_block {
-    margin-top: 100px;
+    margin-top: 50px;
     display: flex;
     flex-flow: wrap;
     justify-content: center;

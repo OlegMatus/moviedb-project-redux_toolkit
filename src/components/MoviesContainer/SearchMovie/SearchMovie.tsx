@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, PropsWithChildren, useEffect, useState} from 'react';
 
-import {useAppDispatch, useAppLocation, useAppQuery, useAppSelector} from "../../../hooks";
+import {useAppDispatch, useAppLocation, useAppSelector} from "../../../hooks";
 import {movieAction} from "../../../store";
 import {MovieCard} from "../MovieCard";
 
@@ -14,7 +14,6 @@ const SearchMovie: FC<IProps> = () => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const dispatch = useAppDispatch();
     const {movieByQuery} = useAppSelector(state => state.movies);
-    const {query, /*page*/} = useAppQuery();
     const location = useAppLocation();
 
     const queryParams = new URLSearchParams(location.search);
@@ -42,13 +41,15 @@ const SearchMovie: FC<IProps> = () => {
     }, [location.search]);
 
     return (
-        <div className={css.SearchMovie}>
-            <div className={css.input_block}>
-                <input type="text" placeholder={'searchMovie'} value={searchQuery} onChange={handleChange}/>
-                <button onClick={handleSearch}>search</button>
-            </div>
-            <div className={css.movies_block}>
-                {movieByQuery && movieByQuery.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
+        <div className={css.Main}>
+            <div className={css.SearchMovie}>
+                <div className={css.input_block}>
+                    <input type="text" placeholder={'searchMovie'} value={searchQuery} onChange={handleChange}/>
+                    <button onClick={handleSearch}>search</button>
+                </div>
+                <div className={css.movies_block}>
+                    {movieByQuery && movieByQuery.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
+                </div>
             </div>
         </div>
     );

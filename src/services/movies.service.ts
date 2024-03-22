@@ -6,9 +6,10 @@ import {urls} from "../constants";
 const moviesService = {
     getAll: (page: number): IRes<IPagination<IMovie>> => apiService.get(urls.movies.base, {params: {page}}),
     getById: (id: number): IRes<IMovie> => apiService.get(urls.movies.byId(id)),
-    getByGenreId: (genreId: string, page: number): IRes<IMovie[]> => apiService.get(urls.movies.base, {
+    getByGenreId: (genreId: string, page: number): IRes<IPagination<IMovie>> => apiService.get(urls.movies.base, {
         params: {
-            with_genres: genreId
+            with_genres: genreId,
+            page
         }
     }),
     getByQuery: (query: string, page: number) => apiService.get(urls.searchMovie, {

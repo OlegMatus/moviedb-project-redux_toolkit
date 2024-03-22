@@ -45,7 +45,7 @@ const genreSlice = createSlice({
             })
             .addCase(getAll.rejected, (state, action) => {
                 state.isLoading = false
-                state.error = action.error.message
+                state.error = action.error.message || 'Failed to fetch genres'
             })
 });
 

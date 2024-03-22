@@ -53,7 +53,7 @@ const getById = createAsyncThunk<IMovie, { id: number }>(
     }
 )
 
-const getByGenre = createAsyncThunk<IMovie[], { genreId: string, page: number }>(
+const getByGenre = createAsyncThunk<IPagination<IMovie>, { genreId: string, page: number }>(
     'movieSlice/getByGenreId',
     async ({genreId, page}, {rejectWithValue}) => {
         try {
@@ -74,7 +74,7 @@ const getByQuery = createAsyncThunk<IPagination<IMovie>, { searchQuery: string, 
             return data
         } catch (e) {
             const err = e as AxiosError;
-            return rejectWithValue(err.response.data)
+            return rejectWithValue(err.response.data) || 'Failed to fetch movies'
         }
     }
 )
@@ -104,7 +104,7 @@ const movieSlice = createSlice({
                 state.error = action.error.message
             })
             .addCase(getByGenre.fulfilled, (state, action) => {
-                state.moviesByGenre = action.payload
+                state.moviesByGenre = action.payload.results
             })
             .addCase(getByQuery.fulfilled, (state, action) => {
                 state.movieByQuery = action.payload.results
