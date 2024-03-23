@@ -1,9 +1,8 @@
 import React, {FC, PropsWithChildren, useEffect} from 'react';
 import {useSearchParams} from "react-router-dom";
 
-import {useAppSelector} from "../../../hooks";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {MovieCard} from "../MovieCard";
-import {useAppDispatch} from "../../../hooks";
 import {movieAction} from "../../../store";
 
 import css from "./MovieList.module.css"
@@ -23,15 +22,14 @@ const MoviesList: FC<IProps> = () => {
         dispatch(movieAction.getAll({page}))
     }, []);
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
     return (
         <div className={css.Main}>
-            <div className={css.MoviesListContainer}>
-            {movies.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
-            </div>
+            {!isLoading &&
+                <div className={css.MoviesListContainer}>
+                    {movies.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
+                </div>
+            }
+            {isLoading && <div>Loading...</div>}
         </div>
     );
 };

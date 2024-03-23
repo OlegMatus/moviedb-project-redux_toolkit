@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, isPending, isRejected} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 
 import {IMovie, IPagination} from "../../interfaces";
@@ -85,10 +85,6 @@ const movieSlice = createSlice({
     reducers: {},
     extraReducers: builder =>
         builder
-            .addCase(getAll.pending, state => {
-                state.isLoading = true;
-                state.error = null
-            })
             .addCase(getAll.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.movies = action.payload.results;
@@ -99,15 +95,23 @@ const movieSlice = createSlice({
             .addCase(getById.fulfilled, (state, action) => {
                 state.currentMovie = action.payload
             })
-            .addCase(getAll.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.error.message
-            })
             .addCase(getByGenre.fulfilled, (state, action) => {
-                state.moviesByGenre = action.payload.results
+                state.isLoading = false;
+                state.moviesByGenre = action.payload.results;
+                state.currentPage = action.payload.page;
+                state.totalPages = action.payload.total_pages;
+                state.totalResults = action.payload.total_results
             })
             .addCase(getByQuery.fulfilled, (state, action) => {
                 state.movieByQuery = action.payload.results
+            })
+            .addMatcher(isPending(getAll, getByGenre), state => {
+                state.isLoading = true;
+                state.error = null
+            })
+            .addMatcher(isRejected(getAll, getByQuery, getByGenre), (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message
             })
 });
 

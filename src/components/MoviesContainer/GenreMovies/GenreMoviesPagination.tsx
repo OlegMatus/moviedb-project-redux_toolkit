@@ -1,19 +1,20 @@
 import React, {useEffect} from 'react';
+import {useParams} from "react-router-dom";
 
-import {useAppDispatch, useAppQuery, useAppSelector} from "../../hooks";
-import {movieAction} from "../../store";
 
-import css from "./MoviePagination.module.css"
+import {useAppDispatch, useAppQuery, useAppSelector} from "../../../hooks";
+import {movieAction} from "../../../store";
 
-const MoviesPagination = () => {
+const GenreMoviesPagination = () => {
     const dispatch = useAppDispatch();
     const {currentPage, totalPages, isLoading} = useAppSelector(state => state.movies);
     const {page, setQuery} = useAppQuery();
+    const {genreId} = useParams<{ genreId: string }>();
 
     const handlePrevPage = async () => {
         if (currentPage > 1) {
             const newPage = currentPage - 1;
-            await dispatch(movieAction.getAll({page: newPage}));
+            await dispatch(movieAction.getByGenre({genreId, page: newPage}));
             setQuery({page: newPage.toString()})
         }
     };
@@ -22,18 +23,18 @@ const MoviesPagination = () => {
         if (currentPage < totalPages) {
             const newPage = currentPage + 1;
             if (newPage !== page) {
-                await dispatch(movieAction.getAll({page: newPage}));
+                await dispatch(movieAction.getByGenre({genreId, page: newPage}));
                 setQuery({page: newPage.toString()})
             }
         }
     };
 
     useEffect(() => {
-        dispatch(movieAction.getAll({page}));
-    }, [dispatch, page]);
+        dispatch(movieAction.getByGenre({genreId, page}));
+    }, [dispatch, page, genreId]);
 
     return (
-        <div className={css.Pagination}>
+        <div style={{display: "flex", justifyContent: "center"}}>
             <button onClick={handlePrevPage} disabled={currentPage === 1 || isLoading}>prev</button>
             <div style={{width: 30, display: "flex", justifyContent: "center", color: "black"}}><b>{currentPage}</b>
             </div>
@@ -42,4 +43,4 @@ const MoviesPagination = () => {
     );
 };
 
-export {MoviesPagination};
+export {GenreMoviesPagination};
