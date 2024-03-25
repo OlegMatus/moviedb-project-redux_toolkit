@@ -1,5 +1,5 @@
 import {IRes} from "../types";
-import {IMovie, IPagination} from "../interfaces";
+import {IMovie, IPagination, IVideos} from "../interfaces";
 import {apiService} from "./api.service";
 import {urls} from "../constants";
 
@@ -17,7 +17,8 @@ const moviesService = {
             query,
             page
         }
-    })
+    }),
+    getVideoById: (movieId: number): IRes<IVideos> => apiService.get(urls.videos.byId(movieId))
 };
 
 export {moviesService};

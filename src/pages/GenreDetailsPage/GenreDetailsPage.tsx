@@ -1,5 +1,6 @@
 import React from 'react';
 import {FC, PropsWithChildren} from 'react';
+
 import {GenreMovies} from "../../components";
 import {GenreMoviesPagination} from "../../components/MoviesContainer/GenreMovies/GenreMoviesPagination";
 

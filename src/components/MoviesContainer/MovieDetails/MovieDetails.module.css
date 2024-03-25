@@ -1,0 +1,31 @@
+h1 {
+    margin: 15px 0 0 0;
+}
+h3{
+    color: teal;
+}
+
+.MovieInfoMain {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.poster_container {
+    margin: 20px 100px 0 0;
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.info_block {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+.trailer_block {
+    margin-bottom: 20px;
+}

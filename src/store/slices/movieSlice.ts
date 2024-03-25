@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, isPending, isRejected} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 
-import {IMovie, IPagination} from "../../interfaces";
+import {IMovie, IPagination, IVideo} from "../../interfaces";
 import {moviesService} from "../../services";
 
 interface IState {
@@ -9,6 +9,7 @@ interface IState {
     moviesByGenre: IMovie[],
     movieByQuery: IMovie[],
     currentMovie: IMovie,
+    videos: IVideo[],
     currentPage: number,
     totalPages: number,
     totalResults: number,
@@ -21,6 +22,7 @@ const initialState: IState = {
     moviesByGenre: [],
     movieByQuery: null,
     currentMovie: null,
+    videos: [],
     currentPage: 1,
     totalPages: 1,
     totalResults: 1,
@@ -40,12 +42,13 @@ const getAll = createAsyncThunk<IPagination<IMovie>, { page: number }>(
     }
 )
 
-const getById = createAsyncThunk<IMovie, { id: number }>(
+const getById = createAsyncThunk<{ currentMovie: IMovie, videos: IVideo[] }, { id: number }>(
     'movieSlice/getById',
     async ({id}, {rejectWithValue}) => {
         try {
-            const {data} = await moviesService.getById(id);
-            return data
+            const {data: currentMovie} = await moviesService.getById(id);
+            const {data: {results: videos}} = await moviesService.getVideoById(id);
+            return {currentMovie, videos}
         } catch (e) {
             const error = e as AxiosError;
             return rejectWithValue(error.response.data)
@@ -93,7 +96,8 @@ const movieSlice = createSlice({
                 state.totalResults = action.payload.total_results
             })
             .addCase(getById.fulfilled, (state, action) => {
-                state.currentMovie = action.payload
+                state.currentMovie = action.payload.currentMovie;
+                state.videos = action.payload.videos
             })
             .addCase(getByGenre.fulfilled, (state, action) => {
                 state.isLoading = false;
@@ -104,6 +108,8 @@ const movieSlice = createSlice({
             })
             .addCase(getByQuery.fulfilled, (state, action) => {
                 state.movieByQuery = action.payload.results
+                state.totalPages = action.payload.total_pages
+                state.totalResults = action.payload.total_results
             })
             .addMatcher(isPending(getAll, getByGenre), state => {
                 state.isLoading = true;

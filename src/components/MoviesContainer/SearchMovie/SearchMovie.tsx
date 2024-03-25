@@ -5,6 +5,7 @@ import {movieAction} from "../../../store";
 import {MovieCard} from "../MovieCard";
 
 import css from "./SearchMovie.module.css"
+import {Spinner} from "../../Spinner";
 
 interface IProps extends PropsWithChildren {
 
@@ -13,7 +14,7 @@ interface IProps extends PropsWithChildren {
 const SearchMovie: FC<IProps> = () => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const dispatch = useAppDispatch();
-    const {movieByQuery} = useAppSelector(state => state.movies);
+    const {movieByQuery, isLoading} = useAppSelector(state => state.movies);
     const location = useAppLocation();
 
     const queryParams = new URLSearchParams(location.search);
@@ -44,12 +45,15 @@ const SearchMovie: FC<IProps> = () => {
         <div className={css.Main}>
             <div className={css.SearchMovie}>
                 <div className={css.input_block}>
-                    <input type="text" placeholder={'searchMovie'} value={searchQuery} onChange={handleChange}/>
+                    <input type="text" placeholder={'searchMovie'} value={searchQuery} onChange={handleChange} style={{width: 220}} />
                     <button onClick={handleSearch}>search</button>
                 </div>
+                {!isLoading &&
                 <div className={css.movies_block}>
                     {movieByQuery && movieByQuery.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
                 </div>
+                }
+                {isLoading && <Spinner/>}
             </div>
         </div>
     );
