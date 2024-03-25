@@ -16,7 +16,7 @@ const GenreCard: FC<IProps> = ({genre}) => {
     return (
         <div className={css.GenreBox}>
             <Link to={`/genres/${id}`}>
-                <Badge color={'black'} pill={false} style={{color: "gold"}}>{name}</Badge>
+                <Badge color={'black'} pill={false} style={{color: "#9aa43a"}}>{name}</Badge>
             </Link>
         </div>
     );

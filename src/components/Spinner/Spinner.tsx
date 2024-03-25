@@ -19,7 +19,7 @@ const Spinner = () => {
                     variant="indeterminate"
                     disableShrink
                     sx={{
-                        color: (theme) => (theme.palette.mode === 'light' ? '#8D84A7' : '#308fe8'),
+                        color: (theme) => (theme.palette.mode === 'light' ? '#3127C9E8' : '#308fe8'),
                         animationDuration: '550ms',
                         position: 'absolute',
                         left: 0,

@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-import {Avatar, Stack} from "@mui/material";
+import {Avatar, css, Stack} from "@mui/material";
 
 const UserInfo = () => {
     const [userInfo, setUserInfo] = useState<boolean>(true);
@@ -20,15 +20,12 @@ const UserInfo = () => {
                 alignItems={"center"}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                style={{
-                    color: 'yellow',
-                    height: 80,
-                    marginLeft: 10,
-                }}
             >
-                <b style={{color: "blue"}}>SlavaUkraine!</b>
-                <Avatar src="/broken-image.jpg"/>
-                {userInfo && <span>user</span>}
+                <div style={{display: "flex", flexFlow: "wrap", alignItems: "center", color: "gold"}}>
+                    <div><b style={{color: "blue"}}>SlavaUkraine!</b></div>
+                    <Avatar src="/broken-image.jpg" style={{marginLeft: 10, marginRight: 10}}/>
+                    <div>{userInfo && <span>user</span>}</div>
+                </div>
             </Stack>
         </div>
     );

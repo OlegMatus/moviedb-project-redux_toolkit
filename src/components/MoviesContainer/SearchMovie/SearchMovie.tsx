@@ -18,10 +18,10 @@ const SearchMovie: FC<IProps> = () => {
     const location = useAppLocation();
 
     const queryParams = new URLSearchParams(location.search);
-    const page = queryParams.get('page');
-    const search = () => {
+    const page: string | null = queryParams.get('page');
+    const search = async () => {
         try {
-            dispatch(movieAction.getByQuery({searchQuery, page: +page || 1}))
+            await dispatch(movieAction.getByQuery({searchQuery, page: +page || 1}))
         } catch (e) {
             console.error('Error searching movies:', e);
         }
@@ -45,13 +45,14 @@ const SearchMovie: FC<IProps> = () => {
         <div className={css.Main}>
             <div className={css.SearchMovie}>
                 <div className={css.input_block}>
-                    <input type="text" placeholder={'searchMovie'} value={searchQuery} onChange={handleChange} style={{width: 220}} />
+                    <input type="text" placeholder={'searchMovie'} value={searchQuery} onChange={handleChange}
+                           style={{width: 220}}/>
                     <button onClick={handleSearch}>search</button>
                 </div>
                 {!isLoading &&
-                <div className={css.movies_block}>
-                    {movieByQuery && movieByQuery.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
-                </div>
+                    <div className={css.movies_block}>
+                        {movieByQuery && movieByQuery.map(movie => <MovieCard key={movie.id} movie={movie}/>)}
+                    </div>
                 }
                 {isLoading && <Spinner/>}
             </div>
