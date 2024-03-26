@@ -50,7 +50,7 @@ const MoviesPagination = () => {
             {/*<button onClick={handleNextPage} disabled={currentPage === totalPages || isLoading}>next</button>*/}
             <Stack spacing={2}>
                 <Pagination count={totalPages} page={currentPage} showFirstButton={true} showLastButton={true}
-                            onChange={handlePageChange}/>
+                            onChange={handlePageChange} disabled={isLoading}/>
             </Stack>
         </div>
     );

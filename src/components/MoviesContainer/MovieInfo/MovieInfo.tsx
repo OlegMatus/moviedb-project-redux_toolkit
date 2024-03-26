@@ -7,29 +7,32 @@ import {Spinner} from "../../Spinner";
 import {MovieDetails} from "../MovieDetails";
 
 import css from "./MovieInfo.module.css"
+import {IMovie, IVideo} from "../../../interfaces";
 
 interface IProps extends PropsWithChildren {
-
+    currentMovie: IMovie,
+    videos: IVideo[]
 }
 
-const MovieInfo: FC<IProps> = () => {
+const MovieInfo: FC<IProps> = ({currentMovie, videos}) => {
     const dispatch = useAppDispatch();
 
-    const {currentMovie, isLoading, videos} = useAppSelector(state => state.movies);
-    // const {genres} = useAppSelector(state => state.genres);
+    const {isLoading} = useAppSelector(state => state.movies);
+
     const {id} = useParams();
 
     useEffect(() => {
-        const movie = dispatch(movieAction.getById({id: Number(id)}));
-        console.log(movie);
+             dispatch(movieAction.getById({id: Number(id)}));
     }, [dispatch, id]);
+
 
     const trailers = [...videos].filter(video => video.name === 'Official Trailer')
     const movieTitle = currentMovie && (currentMovie.title || currentMovie.original_title)
 
     return (
         <div className={css.MovieDetailsBlock}>
-            {currentMovie && !isLoading && trailers.map(trailer => <MovieDetails currentMovie={currentMovie}
+            {currentMovie && !isLoading && trailers.map(trailer => <MovieDetails key={currentMovie.id}
+                                                                                 currentMovie={currentMovie}
                                                                                  trailer={trailer}
                                                                                  movieTitle={movieTitle}/>)}
             {isLoading && <Spinner/>}

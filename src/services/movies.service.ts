@@ -18,7 +18,7 @@ const moviesService = {
             page
         }
     }),
-    getVideoById: (movieId: number): IRes<IVideos> => apiService.get(urls.videos.byId(movieId))
+    getVideoById: (id: number): IRes<IVideos> => apiService.get(urls.videos.byId(id))
 };
 
 export {moviesService};

@@ -5,3 +5,9 @@
     align-items: center;
     margin-bottom: 15px;
 }
+.title_block {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
