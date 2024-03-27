@@ -2,7 +2,7 @@ import React from 'react';
 
 import {MovieInfo} from "../../components";
 import {useLoaderData} from "react-router-dom";
-import {IMovieDetails} from "../../interfaces/movieDetailsInterface";
+import {IMovieDetails} from "../../interfaces";
 
 const MovieDetailsPage = () => {
     const {dataMovie: currentMovie, dataVideos: {results: videos}} = useLoaderData() as IMovieDetails;
