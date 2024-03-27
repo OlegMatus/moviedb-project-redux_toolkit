@@ -6,14 +6,12 @@ import {genresService} from "../../services";
 
 interface IState {
     genres: IGenre[],
-    genresByMovieIds: IGenre[],
     isLoading: boolean,
     error: string
 }
 
 const initialState: IState = {
     genres: [],
-    genresByMovieIds: [],
     isLoading: false,
     error: ''
 };
@@ -30,23 +28,6 @@ const getAll = createAsyncThunk<IGenres, void>(
         }
     }
 );
-
-const getByMovieId = createAsyncThunk<IGenres, { id: number }>(
-    'genreSlice/getByIds',
-    async ({id}, {rejectWithValue}) => {
-        try {
-            const {data} = await genresService.getByMovieId(id);
-            return data;
-            // const movieGenres = genres.filter((genre: { id: number }) => movie.genre_ids.includes(genre.id));
-            // return { movieId: movie.id, genres: movieGenres };
-
-            // return movieGenres
-        } catch (e) {
-            const err = e as AxiosError;
-            return rejectWithValue(err.response.data)
-        }
-    }
-)
 
 const genreSlice = createSlice({
     name: 'genreSlice',
@@ -66,9 +47,6 @@ const genreSlice = createSlice({
                 state.isLoading = false
                 state.error = action.error.message || 'Failed to fetch genres'
             })
-    .addCase(getByMovieId.fulfilled, (state, action) => {
-        state.genresByMovieIds = action.payload.genres
-    })
 });
 
 const {reducer: genresReducer, actions} = genreSlice;
@@ -76,7 +54,6 @@ const {reducer: genresReducer, actions} = genreSlice;
 const genresActions = {
     ...actions,
     getAll,
-    getByMovieId
 }
 
 export {

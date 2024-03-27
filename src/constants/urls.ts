@@ -13,10 +13,7 @@ const urls = {
         base: movies,
         byId: (id: number): string => `${movieById}/${id}`
     },
-    genres: {
-        base: genres,
-        byMovieId: (movieId: number): string => `${genres}/${movieId}`
-    },
+    genres,
     searchMovie,
     videos:{
         byId: (movieId: number): string => `${movieById}/${movieId}/videos`
