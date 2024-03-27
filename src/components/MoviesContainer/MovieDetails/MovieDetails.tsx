@@ -45,7 +45,7 @@ const MovieDetails: FC<IProps> = ({currentMovie, trailer, movieTitle, genres}) =
                         <h3>Genres</h3>
                         {genres && genres.map(genre => (
                             <div key={genre?.id}>
-                                <Link to={`/genres/${genre.id}`}>
+                                <Link to={`/genres/${genre?.id}`}>
                                     <Badge color={'black'} pill={false}
                                            style={{color: "#9aa43a"}}><b>{genre?.name || 'Unknown Genre'}</b></Badge>
                                 </Link>
