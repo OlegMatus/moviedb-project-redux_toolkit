@@ -33,7 +33,7 @@ const labels: { [index: string]: string } = {
 
 const StarsRating: FC<IProps> = ({vote_average}) => {
     const [ratingState, setRatingState] = useState<number | null>(vote_average);
-    const [hover] = useState(-1);
+    // const [hover] = useState(-1);
 
     useEffect(() => {
         try {

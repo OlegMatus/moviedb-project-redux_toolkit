@@ -39,7 +39,7 @@ const SearchMovie: FC<IProps> = () => {
         if (searchQuery.trim() !== '') {
             search();
         }
-    }, [location.search]);
+    }, [location.search, searchQuery]);
 
     return (
         <div className={css.Main}>
@@ -47,7 +47,7 @@ const SearchMovie: FC<IProps> = () => {
                 <div className={css.input_block}>
                     <input type="text" placeholder={'searchMovie'} value={searchQuery} onChange={handleChange}
                            style={{width: 220}}/>
-                    <button onClick={handleSearch}>search</button>
+                    <button onClick={handleSearch} style={{background:"black", color: "white"}}>search</button>
                 </div>
                 {!isLoading &&
                     <div className={css.movies_block}>

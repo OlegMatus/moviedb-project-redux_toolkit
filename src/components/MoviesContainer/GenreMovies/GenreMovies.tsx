@@ -18,7 +18,7 @@ const GenreMovies: FC<IProps> = () => {
     const {page} = useAppQuery();
 
     useEffect(() => {
-        const data = dispatch(movieAction.getByGenre({genreId, page}));
+        dispatch(movieAction.getByGenre({genreId, page}));
     }, [dispatch, genreId, page]);
 
     return (

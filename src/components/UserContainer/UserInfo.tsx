@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-import {Avatar, css, Stack} from "@mui/material";
+import {Avatar, Stack} from "@mui/material";
 
 const UserInfo = () => {
     const [userInfo, setUserInfo] = useState<boolean>(true);

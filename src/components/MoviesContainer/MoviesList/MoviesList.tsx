@@ -16,12 +16,12 @@ const MoviesList: FC<IProps> = () => {
     const {movies, isLoading} = useAppSelector(state => state.movies);
     const dispatch = useAppDispatch();
 
-    const [query, _] = useSearchParams();
+    const [query] = useSearchParams();
     const page = +query.get('page');
 
     useEffect(() => {
         dispatch(movieAction.getAll({page}))
-    }, []);
+    }, [dispatch, page]);
 
     return (
         <div className={css.Main}>
